@@ -1,5 +1,5 @@
-from flask import Flask, jsonify, render_template, request, json
-import requests, random
+from flask import Flask, jsonify, render_template, request
+import requests
 import json, csv
 
 app = Flask(__name__)
@@ -44,13 +44,10 @@ def index():
 		writer.writerow(('Date', 'Num', 'Max'))
 		for key in dates:
 			writer.writerow((key, dates[key]))
-			# writer.writerow(key + ',' + str(dates[key]) + '\n')
 
 	f.close()
 	
-	print region_list
-	return render_template("index.html", api_data=region_list)
-
+	return render_template("index.html")
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0')
