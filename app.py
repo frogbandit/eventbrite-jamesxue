@@ -17,13 +17,14 @@ def index():
 	regions = {}
 	for i in range (0, len(events_list)):
 		venue_id = events_list[i]['venue_id']
-		venue_url = 'https://www.eventbriteapi.com/v3/venues/' + venue_id + '/?token=GLLTVQVQWAUUGUO3FYZX'
-		v = requests.get(venue_url).json()
-		region = v['address']['region']
-		if region in regions:
-			regions[region] += 1
-		else:
-			regions[region] = 1
+		if venue_id is not None:
+			venue_url = 'https://www.eventbriteapi.com/v3/venues/' + venue_id + '/?token=GLLTVQVQWAUUGUO3FYZX'
+			v = requests.get(venue_url).json()
+			region = v['address']['region']
+			if region in regions:
+				regions[region] += 1
+			else:
+				regions[region] = 1
 
 		date = events_list[i]['start']['utc'].split('T')[0]
 		if date in dates:
